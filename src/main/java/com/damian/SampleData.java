@@ -2,7 +2,7 @@ package com.damian;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,8 +48,5 @@ public class SampleData {
         emailFolder.put("spam", Spam);
 
     }
-
-
-
 
 }

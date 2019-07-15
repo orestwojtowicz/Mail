@@ -1,22 +1,21 @@
 package com.damian;
 
-
-
-
-import com.jfoenix.controls.JFXButton;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -25,6 +24,7 @@ public class MainController implements Initializable {
 
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
     private SampleData sampleData = new SampleData();
+    private Singleton singleton;
 
     @FXML
     private Button button1;
@@ -47,6 +47,9 @@ public class MainController implements Initializable {
     @FXML
     private TreeView<String> emailFolderTreeView;
 
+    @FXML
+    private MenuItem showDetails = new MenuItem("show details");
+
 
     @FXML
     void ButtonClick(ActionEvent event) {
@@ -58,7 +61,11 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        messageRenderer.getEngine().loadContent("<html>Ojcu is the best</html>");
+        singleton = Singleton.getInstance();
+
+
+
+
 
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
@@ -67,7 +74,7 @@ public class MainController implements Initializable {
 
 
 
-        sizeColumn.setComparator(new Comparator<String>() {
+        sizeColumn.setComparator(new Comparator<>() {
 
             Integer int1, int2;
 
@@ -164,6 +171,9 @@ public class MainController implements Initializable {
 
         //----------------TreeView Section END------------------------
 
+
+
+
         emailFolderTreeView.setOnMouseClicked(event -> {
             TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
             if(item != null) {
@@ -173,9 +183,40 @@ public class MainController implements Initializable {
 
 
 
+        emailTableView.setOnMouseClicked(event -> {
+        EmailMessageBean messageBean = emailTableView.getSelectionModel().getSelectedItem();
+        if(messageBean != null) {
+            messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
+            singleton.setMessageBean(messageBean);
+        }
+
+
+    });
+
+
+        emailTableView.setContextMenu(new ContextMenu(showDetails));
+
+        showDetails.setOnAction(event -> {
+
+            Parent parent = null;
+            Stage primaryStage = new Stage();
+
+            try {
+
+                parent = FXMLLoader.load(getClass().getClassLoader().getResource("emailDetailsLayout.fxml"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(parent);
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+
+        });
+
     }
-
-
 
 }
 

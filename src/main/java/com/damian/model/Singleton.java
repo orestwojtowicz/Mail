@@ -1,4 +1,4 @@
-package com.damian;
+package com.damian.model;
 
 public class Singleton {
 

@@ -1,5 +1,9 @@
-package com.damian;
+package com.damian.controller;
 
+import com.damian.ViewFactory;
+import com.damian.model.EmailMessageBean;
+import com.damian.model.SampleData;
+import com.damian.model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +29,7 @@ public class MainController implements Initializable {
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
     private SampleData sampleData = new SampleData();
     private Singleton singleton;
+    private ViewFactory viewFactory = new ViewFactory();
 
     @FXML
     private Button button1;
@@ -196,7 +201,7 @@ public class MainController implements Initializable {
 
         emailTableView.setContextMenu(new ContextMenu(showDetails));
 
-        showDetails.setOnAction(event -> {
+    /*    showDetails.setOnAction(event -> {
 
             Parent parent = null;
             Stage primaryStage = new Stage();
@@ -209,10 +214,20 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
             Scene scene = new Scene(parent);
-            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
 
+
+        });*/
+
+        showDetails.setOnAction(event -> {
+
+
+            Scene scene = viewFactory.getEmailDetailScene();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
 
         });
 

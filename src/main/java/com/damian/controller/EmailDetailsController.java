@@ -1,5 +1,6 @@
-package com.damian;
+package com.damian.controller;
 
+import com.damian.model.Singleton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

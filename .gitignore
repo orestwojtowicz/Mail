@@ -1,0 +1,14 @@
+
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.xml
+*.txt
+
+### Gradle ###
+.idea/**/gradle.xml
+.idea/**/libraries

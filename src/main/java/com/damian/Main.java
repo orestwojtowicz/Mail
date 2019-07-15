@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -16,17 +17,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         Parent root = null;
 
         try {
-           root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+
+         root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
     }
+
+
 }

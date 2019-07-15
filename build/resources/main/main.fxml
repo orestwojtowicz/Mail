@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.damian.Main"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label>Hello Again</Label>
+<AnchorPane prefHeight="748.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.Main">
+
+   <Button layoutX="21.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
+   <Button layoutX="93.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
+   <Button layoutX="166.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
+   <TreeView layoutX="14.0" layoutY="54.0" prefHeight="693.0" prefWidth="200.0" />
+   <ListView layoutX="228.0" layoutY="62.0" prefHeight="200.0" prefWidth="548.0" />
+   <WebView layoutX="228.0" layoutY="274.0" prefHeight="462.0" prefWidth="548.0" />
 
 </AnchorPane>

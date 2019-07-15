@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
+    private SampleData sampleData = new SampleData();
 
     @FXML
     private Button button1;
@@ -52,13 +53,6 @@ public class MainController implements Initializable {
         System.out.println("Button clicked");
     }
 
-    final ObservableList<EmailMessageBean> data = FXCollections.observableArrayList(
-            new EmailMessageBean("Hello from", "ojcu@gmail.com", 555000),
-            new EmailMessageBean("Hello from ojcu", "ojcu@gmail.com", 5550),
-            new EmailMessageBean("Hello from anetka", "trociny@!", 5),
-            new EmailMessageBean("Hello from dawid", "pocz@gmail.com", 2)
-
-    );
 
 
     @Override
@@ -70,7 +64,7 @@ public class MainController implements Initializable {
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
 
-        emailTableView.setItems(data);
+
 
 
         sizeColumn.setComparator(new Comparator<String>() {
@@ -95,7 +89,9 @@ public class MainController implements Initializable {
         //-------------------TreeView Section START-----------------------
 
 
-        final Node emailImage = new ImageView(
+
+
+   final Node emailImage = new ImageView(
                 new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
         ((ImageView) emailImage).setFitHeight(25);
         ((ImageView) emailImage).setFitWidth(25);
@@ -168,10 +164,17 @@ public class MainController implements Initializable {
 
         //----------------TreeView Section END------------------------
 
+        emailFolderTreeView.setOnMouseClicked(event -> {
+            TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
+            if(item != null) {
+                emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
+            }
+        });
 
 
 
     }
+
 
 
 }

@@ -11,15 +11,22 @@ public class EmailMessageBean {
     private SimpleStringProperty sender;
     private SimpleStringProperty subject;
     private SimpleStringProperty size;
+    private String htmlContent;
 
     public static Map<String, Integer> formattedValues = new HashMap<>();
 
-    public EmailMessageBean(String sender, String subject, int size) {
+    public EmailMessageBean(String sender, String subject, int size, String htmlContent) {
 
         this.sender = new SimpleStringProperty(subject);
         this.subject = new SimpleStringProperty(subject);
         this.size = new SimpleStringProperty(formatSize(size));
+        this.htmlContent = htmlContent;
 
+    }
+
+
+    public String getHtmlContent() {
+        return htmlContent;
     }
 
     public String getSender() {

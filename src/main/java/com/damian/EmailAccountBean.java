@@ -1,5 +1,6 @@
 package com.damian;
 
+import com.damian.model.EmailMessageBean;
 import javafx.collections.ObservableList;
 
 import javax.mail.*;
@@ -81,6 +82,7 @@ public class EmailAccountBean {
 
     public void addEmailstoData(ObservableList<EmailMessageBean> data) {
         try {
+
             Folder folder = store.getFolder("INBOX");
             folder.open(Folder.READ_ONLY);
 

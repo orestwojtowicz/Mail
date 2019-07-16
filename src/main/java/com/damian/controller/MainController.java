@@ -1,8 +1,13 @@
 package com.damian.controller;
 
+import com.damian.EmailAccountBean;
 import com.damian.ViewFactory;
-import com.damian.EmailMessageBean;
+import com.damian.model.EmailMessageBean;
 import com.damian.model.Singleton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -23,9 +27,18 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
-   // private SampleData sampleData = new SampleData();
+    //private SampleData sampleData = new SampleData();
     private Singleton singleton;
     private ViewFactory viewFactory = new ViewFactory();
+    private EmailAccountBean emailAccountBean;
+
+
+    private ObservableList<EmailMessageBean> data = FXCollections.observableArrayList();
+
+    public ObservableList<EmailMessageBean> getData() {
+        return data;
+    }
+
 
     @FXML
     private Button button1;
@@ -52,11 +65,20 @@ public class MainController implements Initializable {
     private MenuItem showDetails = new MenuItem("show details");
 
 
+
     @FXML
     void ButtonClick(ActionEvent event) {
-        System.out.println("Button clicked");
     }
 
+
+/*
+        emailFolderTreeView.setOnMouseClicked(event -> {
+        TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
+        if(item != null) {
+            // emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
+        }
+    });
+*/
 
 
     @Override
@@ -88,7 +110,26 @@ public class MainController implements Initializable {
         });
 
 
-        button1.setOnAction((event -> System.out.println("Clicked")));
+        button1.setOnAction((event -> {
+            Service<Void> emailService = new Service<Void>(){
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<Void>(){
+                        @Override
+                        protected Void call() throws Exception {
+                            ObservableList<EmailMessageBean> data = getData();
+                            final EmailAccountBean emailAccountBean = new EmailAccountBean("****", "*****");
+                            emailAccountBean.addEmailstoData(data);
+                            return null;
+                        }
+
+                    };
+                }
+
+            };
+            emailService.start();
+
+        }));
 
 
 
@@ -99,7 +140,7 @@ public class MainController implements Initializable {
 
 
 
-   final Node emailImage = new ImageView(
+        final Node emailImage = new ImageView(
                 new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
         ((ImageView) emailImage).setFitHeight(25);
         ((ImageView) emailImage).setFitWidth(25);
@@ -178,47 +219,28 @@ public class MainController implements Initializable {
         emailFolderTreeView.setOnMouseClicked(event -> {
             TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
             if(item != null) {
-               // emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
+                emailTableView.setItems(getData());
+
             }
         });
 
 
 
         emailTableView.setOnMouseClicked(event -> {
-        EmailMessageBean messageBean = emailTableView.getSelectionModel().getSelectedItem();
-        if(messageBean != null) {
-            messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
-            singleton.setMessageBean(messageBean);
-        }
+            EmailMessageBean messageBean = emailTableView.getSelectionModel().getSelectedItem();
+            if(messageBean != null) {
+                messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
+                singleton.setMessageBean(messageBean);
+            }
 
 
-    });
+        });
 
 
         emailTableView.setContextMenu(new ContextMenu(showDetails));
 
-    /*    showDetails.setOnAction(event -> {
-
-            Parent parent = null;
-            Stage primaryStage = new Stage();
-
-            try {
-
-                parent = FXMLLoader.load(getClass().getClassLoader().getResource("emailDetailsLayout.fxml"));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(parent);
-            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-
-        });*/
 
         showDetails.setOnAction(event -> {
-
 
             Scene scene = viewFactory.getEmailDetailScene();
             Stage stage = new Stage();
@@ -230,10 +252,6 @@ public class MainController implements Initializable {
     }
 
 }
-
-
-
-
 
 
 

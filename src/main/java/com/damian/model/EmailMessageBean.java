@@ -1,4 +1,4 @@
-package com.damian;
+package com.damian.model;
 
 
 import javafx.beans.property.SimpleStringProperty;
@@ -22,9 +22,10 @@ public class EmailMessageBean {
         this.subject = new SimpleStringProperty(subject);
         this.size = new SimpleStringProperty(formatSize(size));
         this.htmlContent = htmlContent;
-        this.flag = flag;
+
 
     }
+
 
     public boolean isFlag() {
         return flag;
@@ -71,14 +72,5 @@ public class EmailMessageBean {
        return returnValue;
     }
 
-    @Override
-    public String toString() {
-        return "EmailMessageBean{" +
-                "sender=" + sender +
-                ", subject=" + subject +
-                ", size=" + size +
-                ", htmlContent='" + htmlContent + '\'' +
-                ", flag=" + flag +
-                '}';
-    }
+
 }

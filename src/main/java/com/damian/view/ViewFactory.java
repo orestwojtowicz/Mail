@@ -1,15 +1,10 @@
-package com.damian.controller.view;
-
+package com.damian.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-
-/**
- * class
- */
 
 public class ViewFactory {
 

@@ -1,10 +1,11 @@
 package com.damian.controller;
 
 import com.damian.imap.EmailAccountBean;
-import com.damian.controller.view.ViewFactory;
+
 import com.damian.model.EmailMessageBean;
 import com.damian.model.GetEmailsData;
 import com.damian.model.Singleton;
+import com.damian.view.ViewFactory;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -30,6 +31,7 @@ public class MainController implements Initializable {
     private Singleton singleton;
     private ViewFactory viewFactory = new ViewFactory();
     private GetEmailsData getEmailsData = new GetEmailsData();
+
 
 
     @FXML
@@ -95,7 +97,7 @@ public class MainController implements Initializable {
                         @Override
                         protected Void call() throws Exception {
                             ObservableList<EmailMessageBean> data = getEmailsData.getData();
-                            final EmailAccountBean emailAccountBean = new EmailAccountBean("*****", "*****");
+                            final EmailAccountBean emailAccountBean = new EmailAccountBean("damianwojtowicz94@gmail.com", "Lapierre2010");
                             emailAccountBean.addEmailsToData(data);
                             return null;
                         }

@@ -1,5 +1,7 @@
 package com.damian.model;
 
+import com.damian.EmailMessageBean;
+
 public class Singleton {
 
     private Singleton() {}

@@ -1,4 +1,4 @@
-package com.damian.model;
+package com.damian;
 
 
 import javafx.beans.property.SimpleStringProperty;
@@ -12,18 +12,27 @@ public class EmailMessageBean {
     private SimpleStringProperty subject;
     private SimpleStringProperty size;
     private String htmlContent;
+    private boolean flag;
 
     public static Map<String, Integer> formattedValues = new HashMap<>();
 
-    public EmailMessageBean(String sender, String subject, int size, String htmlContent) {
+    public EmailMessageBean(String sender, String subject, int size, String htmlContent, boolean flag) {
 
         this.sender = new SimpleStringProperty(sender);
         this.subject = new SimpleStringProperty(subject);
         this.size = new SimpleStringProperty(formatSize(size));
         this.htmlContent = htmlContent;
+        this.flag = flag;
 
     }
 
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public String getHtmlContent() {
         return htmlContent;
@@ -62,5 +71,14 @@ public class EmailMessageBean {
        return returnValue;
     }
 
-
+    @Override
+    public String toString() {
+        return "EmailMessageBean{" +
+                "sender=" + sender +
+                ", subject=" + subject +
+                ", size=" + size +
+                ", htmlContent='" + htmlContent + '\'' +
+                ", flag=" + flag +
+                '}';
+    }
 }

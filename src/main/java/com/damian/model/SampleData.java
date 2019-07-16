@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 
 public class SampleData {
 
@@ -47,6 +48,7 @@ public class SampleData {
         emailFolder.put("sent", Sent);
         emailFolder.put("spam", Spam);
 
-    }
+    }*
 
 }
+*/

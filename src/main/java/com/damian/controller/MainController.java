@@ -1,15 +1,12 @@
 package com.damian.controller;
 
 import com.damian.ViewFactory;
-import com.damian.model.EmailMessageBean;
-import com.damian.model.SampleData;
+import com.damian.EmailMessageBean;
 import com.damian.model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,7 +16,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -27,7 +23,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
-    private SampleData sampleData = new SampleData();
+   // private SampleData sampleData = new SampleData();
     private Singleton singleton;
     private ViewFactory viewFactory = new ViewFactory();
 
@@ -182,7 +178,7 @@ public class MainController implements Initializable {
         emailFolderTreeView.setOnMouseClicked(event -> {
             TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
             if(item != null) {
-                emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
+               // emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
             }
         });
 

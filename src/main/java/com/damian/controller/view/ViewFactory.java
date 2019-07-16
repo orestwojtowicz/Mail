@@ -1,4 +1,4 @@
-package com.damian;
+package com.damian.controller.view;
 
 
 import javafx.fxml.FXMLLoader;

@@ -1,10 +1,10 @@
 package com.damian.controller;
 
-import com.damian.EmailAccountBean;
-import com.damian.ViewFactory;
+import com.damian.imap.EmailAccountBean;
+import com.damian.controller.view.ViewFactory;
 import com.damian.model.EmailMessageBean;
+import com.damian.model.GetEmailsData;
 import com.damian.model.Singleton;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -27,21 +27,13 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
-    //private SampleData sampleData = new SampleData();
     private Singleton singleton;
     private ViewFactory viewFactory = new ViewFactory();
-    private EmailAccountBean emailAccountBean;
-
-
-    private ObservableList<EmailMessageBean> data = FXCollections.observableArrayList();
-
-    public ObservableList<EmailMessageBean> getData() {
-        return data;
-    }
+    private GetEmailsData getEmailsData = new GetEmailsData();
 
 
     @FXML
-    private Button button1;
+    private Button getEmails;
 
     @FXML
     private WebView messageRenderer;
@@ -71,31 +63,15 @@ public class MainController implements Initializable {
     }
 
 
-/*
-        emailFolderTreeView.setOnMouseClicked(event -> {
-        TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
-        if(item != null) {
-            // emailTableView.setItems(sampleData.emailFolder.get(item.getValue()));
-        }
-    });
-*/
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         singleton = Singleton.getInstance();
 
-
-
-
-
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
-
-
-
 
         sizeColumn.setComparator(new Comparator<>() {
 
@@ -110,16 +86,17 @@ public class MainController implements Initializable {
         });
 
 
-        button1.setOnAction((event -> {
+        // button for getting all emails
+        getEmails.setOnAction((event -> {
             Service<Void> emailService = new Service<Void>(){
                 @Override
                 protected Task<Void> createTask() {
                     return new Task<Void>(){
                         @Override
                         protected Void call() throws Exception {
-                            ObservableList<EmailMessageBean> data = getData();
-                            final EmailAccountBean emailAccountBean = new EmailAccountBean("****", "*****");
-                            emailAccountBean.addEmailstoData(data);
+                            ObservableList<EmailMessageBean> data = getEmailsData.getData();
+                            final EmailAccountBean emailAccountBean = new EmailAccountBean("*****", "*****");
+                            emailAccountBean.addEmailsToData(data);
                             return null;
                         }
 
@@ -137,10 +114,7 @@ public class MainController implements Initializable {
 
         //-------------------TreeView Section START-----------------------
 
-
-
-
-        final Node emailImage = new ImageView(
+       final Node emailImage = new ImageView(
                 new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
         ((ImageView) emailImage).setFitHeight(25);
         ((ImageView) emailImage).setFitWidth(25);
@@ -186,9 +160,6 @@ public class MainController implements Initializable {
         TreeItem<String> root = new TreeItem<>(myAddressRoot,emailImage);
         root.setExpanded(true);
 
-
-
-
         TreeItem<String> inbox = new TreeItem<>("inbox", inboxImage);
         TreeItem<String> sent = new TreeItem<>("sent",sentImage);
         TreeItem<String> spam = new TreeItem<>("spam", spamImage);
@@ -214,12 +185,10 @@ public class MainController implements Initializable {
         //----------------TreeView Section END------------------------
 
 
-
-
         emailFolderTreeView.setOnMouseClicked(event -> {
             TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
             if(item != null) {
-                emailTableView.setItems(getData());
+                emailTableView.setItems(getEmailsData.getData());
 
             }
         });
@@ -250,6 +219,8 @@ public class MainController implements Initializable {
         });
 
     }
+
+
 
 }
 

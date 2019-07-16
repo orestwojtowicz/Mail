@@ -1,4 +1,4 @@
-package com.damian;
+package com.damian.imap;
 
 public class EmailConstants {
 	

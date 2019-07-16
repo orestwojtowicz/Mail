@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,18 +11,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="748.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.MainController">
-
-   <Button fx:id="button1" layoutX="21.0" layoutY="28.0" mnemonicParsing="false" onAction="#ButtonClick" text="Button" />
-   <Button layoutX="93.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
-   <Button layoutX="166.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
-   <TreeView fx:id="emailFolderTreeView" layoutX="14.0" layoutY="54.0" prefHeight="693.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="54.0" />
-   <TableView fx:id="emailTableView" layoutX="228.0" layoutY="62.0" prefHeight="200.0" prefWidth="548.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="62.0">
-      <columns>
-         <TableColumn fx:id="subjectColumn" prefWidth="159.0" text="Subject" />
-         <TableColumn fx:id="senderColumn" prefWidth="157.0" text="Sender" />
-         <TableColumn fx:id="sizeColumn" prefWidth="190.0" text="Size" />
-      </columns></TableView>
-   <WebView fx:id="messageRenderer" layoutX="228.0" layoutY="274.0" prefHeight="462.0" prefWidth="548.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="274.0" />
+<AnchorPane prefHeight="748.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.MainController">
+   <children>
+   
+      <Button fx:id="getEmails" layoutX="21.0" layoutY="28.0" mnemonicParsing="false" onAction="#ButtonClick" text="Get Messages" />
+      <Button layoutX="183.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="290.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
+      <TreeView fx:id="emailFolderTreeView" layoutX="14.0" layoutY="54.0" prefHeight="693.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="54.0" />
+      <TableView fx:id="emailTableView" layoutX="228.0" layoutY="62.0" prefHeight="200.0" prefWidth="548.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="62.0">
+         <columns>
+            <TableColumn fx:id="subjectColumn" prefWidth="159.0" text="Subject" />
+            <TableColumn fx:id="senderColumn" prefWidth="157.0" text="Sender" />
+            <TableColumn fx:id="sizeColumn" prefWidth="190.0" text="Size" />
+         </columns>
+      </TableView>
+      <WebView fx:id="messageRenderer" layoutX="228.0" layoutY="274.0" prefHeight="462.0" prefWidth="548.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="274.0" />
+   </children>
 
 </AnchorPane>

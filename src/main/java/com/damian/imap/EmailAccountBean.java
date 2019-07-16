@@ -1,4 +1,4 @@
-package com.damian;
+package com.damian.imap;
 
 import com.damian.model.EmailMessageBean;
 import javafx.collections.ObservableList;
@@ -14,6 +14,7 @@ public class EmailAccountBean {
     private Properties properties;
     private Session session;
     private Store store;
+
 
     private int loginState = EmailConstants.LOGIN_STATE_NOT_READY;
 
@@ -39,7 +40,7 @@ public class EmailAccountBean {
         return loginState;
     }
 
-    public EmailAccountBean(String EmailAdress, String Password) throws NoSuchProviderException {
+    public EmailAccountBean(String EmailAdress, String Password) {
         this.emailAddress = getEmailAddress();
         this.password = Password;
 
@@ -80,7 +81,7 @@ public class EmailAccountBean {
     }
 
 
-    public void addEmailstoData(ObservableList<EmailMessageBean> data) {
+    public void addEmailsToData(ObservableList<EmailMessageBean> data) {
         try {
 
             Folder folder = store.getFolder("INBOX");
@@ -100,3 +101,40 @@ public class EmailAccountBean {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

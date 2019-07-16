@@ -1,5 +1,6 @@
 package com.damian;
 
+import com.damian.controller.view.ViewFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

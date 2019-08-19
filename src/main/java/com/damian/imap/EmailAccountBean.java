@@ -54,6 +54,7 @@ public class EmailAccountBean {
         properties.put("outgoingHost", "smtp.gmail.com");
 
 
+
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -61,17 +62,18 @@ public class EmailAccountBean {
             }
         };
 
-
         // Connecting:
 
         session = Session.getInstance(properties, auth);
+
+
         try {
             // getting inf from session
             this.store = session.getStore();
             // connecting now
             store.connect(properties.getProperty("incomingHost"), emailAddress, password);
             loginState = EmailConstants.LOGIN_STATE_SUCCEDED;
-            System.out.print("Connected succesfully");
+            System.out.print("Connected successfully");
         } catch (Exception e) {
             System.out.println("Error while connecting");
             loginState = EmailConstants.LOGIN_STATE_FAILED_BY_CREDENTIALS;

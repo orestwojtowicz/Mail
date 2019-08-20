@@ -6,12 +6,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
+
 public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) {
 
@@ -24,6 +24,22 @@ public class Main extends Application {
 
 
     }
-
-
 }
+
+
+
+
+
+
+
+
+/*
+        try {
+            Scene scene = viewFactory.getMainScene();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (OperationNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+    }*/

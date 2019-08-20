@@ -1,19 +1,18 @@
 package com.damian.controller;
 
+import com.damian.ModelAccess;
 import com.damian.controller.services.CreateAndRegisterEmailAccountService;
-import com.damian.imap.EmailAccountBean;
 
+
+import com.damian.controller.services.FolderUpdaterService;
+import com.damian.controller.services.MessageRendererService;
 import com.damian.model.EmailMessageBean;
-import com.damian.model.GetEmailsData;
 import com.damian.model.GetResolveIcons;
 import com.damian.model.Singleton;
 import com.damian.model.folder.EmailFolderBean;
-import com.damian.services.CreateAndRegisterEmailAccount;
-import com.damian.view.IconResolver;
+
 import com.damian.view.ViewFactory;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,13 +28,21 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    private static final String myAddressRoot = "damianwojtowicz94@gmail.com";
+
+/*
+    public MainController(ModelAccess modelAccess) {
+        super(modelAccess);
+    }*/
+
     private Singleton singleton;
 
-    private GetEmailsData getEmailsData = new GetEmailsData();
-
+    private EmailFolderBean emailFolderBean = new EmailFolderBean("");
 
     private GetResolveIcons resolveIcons = new GetResolveIcons();
+
+    private ModelAccess myModelAccess = new ModelAccess();
+
+
 
     @FXML
     private Button getEmails;
@@ -62,9 +69,14 @@ public class MainController implements Initializable {
     private MenuItem showDetails = new MenuItem("show details");
 
     @FXML
+    private MessageRendererService messageRendererService;
+
+    @FXML
     void ButtonClick(ActionEvent event) {
 
     }
+
+
 
 
 
@@ -75,15 +87,28 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+       messageRendererService = new MessageRendererService(messageRenderer.getEngine());
+
+
         ViewFactory viewFactory = ViewFactory.defaultFactory;
 
+        FolderUpdaterService folderUpdaterService = new FolderUpdaterService(myModelAccess.getFoldersList());
+        folderUpdaterService.start();
 
 
-        singleton = Singleton.getInstance();
+
+
+         singleton = Singleton.getInstance();
 
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
+
+
+
+
+
+
 
         sizeColumn.setComparator(new Comparator<>() {
 
@@ -98,51 +123,25 @@ public class MainController implements Initializable {
         });
 
 
-        // button for getting all emails
-        getEmails.setOnAction((event -> {
-            Service<Void> emailService = new Service<Void>(){
-                @Override
-                protected Task<Void> createTask() {
-                    return new Task<Void>(){
-                        @Override
-                        protected Void call() throws Exception {
-                            ObservableList<EmailMessageBean> data = getEmailsData.getData();
-                            final EmailAccountBean emailAccountBean = new EmailAccountBean("damianwojtowicz94@gmail.com", "");
-                            emailAccountBean.addEmailsToData(data);
-                            return null;
-                        }
-
-                    };
-                }
-
-            };
-            emailService.start();
-
-        }));
-
 
         EmailFolderBean<String> root = new EmailFolderBean<>("");
         emailFolderTreeView.setRoot(root);
         emailFolderTreeView.setShowRoot(false);
 
 
-        CreateAndRegisterEmailAccountService CreateAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService("damianwojtowicz94@gmail.com", "", root);
+        CreateAndRegisterEmailAccountService CreateAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService("damianwojtowicz94@gmail.com", "Lapierre2010", root, myModelAccess);
         CreateAndRegisterEmailAccountService1.start();
-
-
-
-
-
-
-
 
 
         emailFolderTreeView.setOnMouseClicked(event -> {
             // TreeItem<String> item = emailFolderTreeView.getSelectionModel().getSelectedItem();
             EmailFolderBean<String> item = (EmailFolderBean<String>) emailFolderTreeView.getSelectionModel().getSelectedItem();
             if(item != null) {
-                emailTableView.setItems(getEmailsData.getData());
+                emailTableView.setItems(item.getData());
                 resolveIcons.setSelectedFolder(item);
+
+                // clear the selected message
+                resolveIcons.setSelectedFolder(null);
 
 
 
@@ -154,8 +153,22 @@ public class MainController implements Initializable {
         emailTableView.setOnMouseClicked(event -> {
             EmailMessageBean messageBean = emailTableView.getSelectionModel().getSelectedItem();
             if(messageBean != null) {
-                messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
-                singleton.setMessageBean(messageBean);
+              //  messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
+
+
+                myModelAccess.setSelectedMessage(messageBean);
+
+                messageRendererService.setMessageToRender(messageBean);
+
+               singleton.setMessageBean(messageBean);
+
+               // messageRendererService.restart(); // bo chcemy aby dzialalo za kazdym razem jak klikne a nie tylko raz jak klikne
+
+                // bo zmieniam on Application thread wyglad i to sie r obi w runnable
+
+                Platform.runLater(messageRendererService);
+
+
 
             }
 
@@ -165,13 +178,49 @@ public class MainController implements Initializable {
         emailTableView.setContextMenu(new ContextMenu(showDetails));
 
         showDetails.setOnAction(event -> {
-
             Scene scene = viewFactory.getEmailDetailScene();
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
 
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*    //-------------------TreeView Section START-----------------------
@@ -256,6 +305,20 @@ public class MainController implements Initializable {
 
 
 
+// java.lang.IllegalStateException: Not on FX application thread; currentThread = Thread-26
+// thread jesto dpowiedzialne za renderowanie wygladu i uzywamy teraz innego thread aby zmienic wyglad
+// jesli chce zmienic wyglad w innym thread
+// Zmiany w GUI musisz odpalać w Dispatch Thread.
+/*
+
+Platform.runLater(new Runnable() {
+@Override
+public void run() {
+        // if you change the UI, do it here !
+        }
+        });
+
+*/
 
 
 
@@ -265,9 +328,31 @@ public class MainController implements Initializable {
 
 
 
+// button for getting all emails
+/*
+        getEmails.setOnAction((event -> {
+            Service<Void> emailService = new Service<Void>(){
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<Void>(){
+                        @Override
+                        protected Void call() throws Exception {
+                            ObservableList<EmailMessageBean> data = ema
 
+                            final EmailAccountBean emailAccountBean = new EmailAccountBean("damianwojtowicz94@gmail.com", "");
+                            emailAccountBean.addEmailsToData(data);
 
+                            return null;
+                        }
 
+                    };
+                }
+
+            };
+            emailService.start();
+
+        }));
+*/
 
 
 

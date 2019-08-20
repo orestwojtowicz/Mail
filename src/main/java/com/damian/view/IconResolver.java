@@ -39,7 +39,7 @@ public class IconResolver {
         } catch(NullPointerException e) {
             e.printStackTrace();
             System.out.println("Error in resolving Icon, wrong path");
-            returnIconName = new ImageView();
+
         }
 
         returnIconName.setFitHeight(20);

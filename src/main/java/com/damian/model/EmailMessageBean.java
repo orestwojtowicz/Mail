@@ -3,6 +3,7 @@ package com.damian.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.mail.Message;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,16 +12,17 @@ public class EmailMessageBean {
     private SimpleStringProperty sender;
     private SimpleStringProperty subject;
     private SimpleStringProperty size;
-    private String htmlContent;
     private boolean flag;
+    private Message messageReference;
 
     public static Map<String, Integer> formattedValues = new HashMap<>();
 
-    public EmailMessageBean(String sender, String subject, int size, String htmlContent, boolean flag) {
+    public EmailMessageBean(String sender, String subject, int size, boolean flag, Message messageReference) {
         this.sender = new SimpleStringProperty(sender);
         this.subject = new SimpleStringProperty(subject);
         this.size = new SimpleStringProperty(formatSize(size));
-        this.htmlContent = htmlContent;
+        this.messageReference = messageReference;
+
     }
 
 
@@ -32,8 +34,8 @@ public class EmailMessageBean {
         this.flag = flag;
     }
 
-    public String getHtmlContent() {
-        return htmlContent;
+    public Message getMessageReference() {
+        return messageReference;
     }
 
     public String getSender() {
@@ -71,3 +73,6 @@ public class EmailMessageBean {
 
 
 }
+/**
+ * asdasd
+ */

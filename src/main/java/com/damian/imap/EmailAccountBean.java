@@ -83,7 +83,7 @@ public class EmailAccountBean {
     }
 
 
-    public void addEmailsToData(ObservableList<EmailMessageBean> data) {
+/*    public void addEmailsToData(ObservableList<EmailMessageBean> data) {
         try {
 
             Folder folder = store.getFolder("INBOX");
@@ -101,7 +101,7 @@ public class EmailAccountBean {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
 
 

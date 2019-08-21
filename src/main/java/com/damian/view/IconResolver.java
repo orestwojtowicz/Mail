@@ -23,18 +23,24 @@ public class IconResolver {
         ImageView returnIconName = new ImageView();
 
         try {
-            if(lowerCaseTreeItemValue.contains("[gmail]")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/Messages-2-icon.png")));
+            if(lowerCaseTreeItemValue.contains("inbox")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/message.png")));
             } else if(lowerCaseTreeItemValue.contains("@")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
-            } else if(lowerCaseTreeItemValue.contains("wysłane")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/adm2.png")));
+            } else if(lowerCaseTreeItemValue.contains("drafts") || lowerCaseTreeItemValue.contains("obrazy")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/drafts.png")));
+            } else if(lowerCaseTreeItemValue.contains("important") || lowerCaseTreeItemValue.contains("ważne")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/important.png")));
+            } else if(lowerCaseTreeItemValue.contains("sent") || lowerCaseTreeItemValue.contains("wysłane")) {
                 returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/sent.png")));
             } else if(lowerCaseTreeItemValue.contains("spam")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/inbox.png")));
-            } else if(lowerCaseTreeItemValue.contains("folder")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/folder1.svg")));
-            } else if(lowerCaseTreeItemValue.contains("kosz")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/spam.png")));
+            } else if(lowerCaseTreeItemValue.contains("starred") || lowerCaseTreeItemValue.contains("oznaczone gwiazdką")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/star.png")));
+            } else if(lowerCaseTreeItemValue.contains("trash") || lowerCaseTreeItemValue.contains("kosz")) {
                 returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/trash.png")));
+            } else if(lowerCaseTreeItemValue.contains("gmail")) {
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/gmail.png")));
             }
         } catch(NullPointerException e) {
             e.printStackTrace();

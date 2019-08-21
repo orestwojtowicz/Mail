@@ -62,11 +62,14 @@ public class FetchFoldersService extends Service<Void> {
                         Folder[] subFolders = folder.list();
                         for (Folder subFolder : subFolders) {
 
-                            modelAccess.addFolder(subFolder);
+                            if(!subFolder.getName().equals("All Mail")) {
 
-                            EmailFolderBean<String> subItem = new EmailFolderBean<>(subFolder.getName(), subFolder.getFullName());
+                                modelAccess.addFolder(subFolder);
 
-                            if(!subFolder.getName().contains("Oznaczone gwiazdką")) {
+
+                                EmailFolderBean<String> subItem = new EmailFolderBean<>(subFolder.getName(), subFolder.getFullName());
+
+
                                 item.getChildren().add(subItem);
                                 System.out.println("added: " + subFolder.getName());
 
@@ -74,7 +77,8 @@ public class FetchFoldersService extends Service<Void> {
 
                                 FetchMessagesOnFolderService fetchMessagesOnFolderServiceSubFolder = new FetchMessagesOnFolderService(subItem, subFolder);
                                 fetchMessagesOnFolderServiceSubFolder.start();
-                            }
+
+                                }
 
                         }
                     }

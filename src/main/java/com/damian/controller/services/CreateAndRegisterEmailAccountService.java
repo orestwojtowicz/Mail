@@ -1,6 +1,7 @@
 package com.damian.controller.services;
 
-import com.damian.ModelAccess;
+
+import com.damian.controller.ModelForMessageController;
 import com.damian.imap.EmailAccountBean;
 import com.damian.imap.EmailConstants;
 import com.damian.model.folder.EmailFolderBean;
@@ -12,7 +13,7 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     private String emailAddress;
     private String password;
     private EmailFolderBean<String> folderRoot;
-    private ModelAccess modelAccess;
+    private ModelForMessageController modelAccess;
 
 
 
@@ -20,7 +21,7 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     public CreateAndRegisterEmailAccountService(
             String emailAddress, String password,
             EmailFolderBean<String> folderRoot,
-            ModelAccess modelAccess) {
+            ModelForMessageController modelAccess) {
 
         this.emailAddress = emailAddress;
         this.password = password;
@@ -35,11 +36,15 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     protected Task<Integer> createTask() {
         return new Task<Integer>(){
             @Override
-            protected Integer call() throws Exception {
+            protected Integer call() {
                 EmailAccountBean emailAccount = new EmailAccountBean(emailAddress, password);
                 if(emailAccount.getLoginState() == EmailConstants.LOGIN_STATE_SUCCEDED){
 
-                    EmailFolderBean<String> emailFolderBean = new EmailFolderBean<String>(emailAddress);
+
+                    modelAccess.addAccount(emailAccount);
+
+
+                    EmailFolderBean<String> emailFolderBean = new EmailFolderBean<>(emailAddress);
 
                     folderRoot.getChildren().add(emailFolderBean);
 

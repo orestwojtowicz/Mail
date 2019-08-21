@@ -7,4 +7,8 @@ public class EmailConstants {
 	public static final int LOGIN_STATE_FAILED_BY_CREDENTIALS = 2;
 	public static final int LOGIN_STATE_SUCCEDED = 3;
 
+
+	public static final int MESSAGE_SENT_OK = 4;
+	public static final int MESSAGE_SENT_ERROR = 5;
+
 }

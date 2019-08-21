@@ -4,7 +4,11 @@ package com.damian.model;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EmailMessageBean {
@@ -14,6 +18,9 @@ public class EmailMessageBean {
     private SimpleStringProperty size;
     private boolean flag;
     private Message messageReference;
+
+    private List<MimeBodyPart> attachmentsList = new ArrayList<>();
+    private StringBuffer attachmentsNames = new StringBuffer();
 
     public static Map<String, Integer> formattedValues = new HashMap<>();
 
@@ -25,6 +32,28 @@ public class EmailMessageBean {
 
     }
 
+    public void addAttachment(MimeBodyPart mbp) throws MessagingException {
+        attachmentsList.add(mbp);
+        attachmentsNames.append(mbp.getFileName() + "; ");
+    }
+
+    public void clearAttachments() {
+        attachmentsList.clear();
+        attachmentsNames.setLength(0); // clear StringBuffer
+    }
+
+    public boolean hasAttachments() {
+        return attachmentsList.size() > 0;
+    }
+
+
+    public List<MimeBodyPart> getAttachmentsList() {
+        return attachmentsList;
+    }
+
+    public StringBuffer getAttachmentsNames() {
+        return attachmentsNames;
+    }
 
     public boolean isFlag() {
         return flag;

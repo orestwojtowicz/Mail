@@ -24,15 +24,15 @@ public class IconResolver {
 
         try {
             if(lowerCaseTreeItemValue.contains("[gmail]")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/inbox-flat.png")));
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/Messages-2-icon.png")));
             } else if(lowerCaseTreeItemValue.contains("@")) {
                 returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
             } else if(lowerCaseTreeItemValue.contains("wysłane")) {
                 returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/sent.png")));
             } else if(lowerCaseTreeItemValue.contains("spam")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/spam.png")));
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/inbox.png")));
             } else if(lowerCaseTreeItemValue.contains("folder")) {
-                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/folder.png")));
+                returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/folder1.svg")));
             } else if(lowerCaseTreeItemValue.contains("kosz")) {
                 returnIconName = new ImageView(new Image(getClass().getResourceAsStream("/img/trash.png")));
             }
@@ -42,8 +42,8 @@ public class IconResolver {
 
         }
 
-        returnIconName.setFitHeight(20);
-        returnIconName.setFitWidth(20);
+        returnIconName.setFitHeight(24);
+        returnIconName.setFitWidth(24);
 
         return returnIconName;
 

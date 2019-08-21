@@ -17,7 +17,8 @@ public class EmailAccountBean {
 
 
     private int loginState = EmailConstants.LOGIN_STATE_NOT_READY;
-
+    public static final int MESSAGE_SENT_OK = 4;
+    public static final int MESSAGE_SENT_ERROR = 5;
 
     public String getEmailAddress() {
         return emailAddress;
@@ -80,6 +81,10 @@ public class EmailAccountBean {
         }
 
 
+    }
+
+    public String getPassword() {
+        return password;
     }
 
 

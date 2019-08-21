@@ -1,6 +1,6 @@
 package com.damian.controller.services;
 
-import com.damian.ModelAccess;
+import com.damian.controller.ModelForMessageController;
 import com.damian.imap.EmailAccountBean;
 import com.damian.model.folder.EmailFolderBean;
 import javafx.concurrent.Service;
@@ -17,19 +17,19 @@ public class FetchFoldersService extends Service<Void> {
     private EmailFolderBean<String> foldersRoot;
     private EmailAccountBean emailAccountBean;
 
-    private ModelAccess modelAccess;
+    private ModelForMessageController modelAccess;
 
-   private static int NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE = 0;
+   //private static int NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE = 0;
 
 
-    public FetchFoldersService(EmailFolderBean<String> foldersRoot, EmailAccountBean emailAccountBean, ModelAccess modelAccess) {
+    public FetchFoldersService(EmailFolderBean<String> foldersRoot, EmailAccountBean emailAccountBean, ModelForMessageController modelAccess) {
         this.foldersRoot = foldersRoot;
         this.emailAccountBean = emailAccountBean;
         this.modelAccess = modelAccess;
 
-        this.setOnSucceeded(e->{
+     /*   this.setOnSucceeded(e->{
             NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE--;
-        });
+        });*/
 
     }
 
@@ -39,7 +39,7 @@ public class FetchFoldersService extends Service<Void> {
         return new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE++;
+               // NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE++;
                 if (emailAccountBean != null) {
                     Folder[] folders = emailAccountBean.getStore().getDefaultFolder().list();
 
@@ -55,8 +55,8 @@ public class FetchFoldersService extends Service<Void> {
                         addMessageListenerToFolder(folder,item);
 
 
-                        FetchMessagesService fetchMessagesService = new FetchMessagesService(item, folder);
-                        fetchMessagesService.start();
+                        FetchMessagesOnFolderService fetchMessagesOnFolderService = new FetchMessagesOnFolderService(item, folder);
+                        fetchMessagesOnFolderService.start();
 
                         System.out.println("added: " + folder.getName());
                         Folder[] subFolders = folder.list();
@@ -72,8 +72,8 @@ public class FetchFoldersService extends Service<Void> {
 
                                 addMessageListenerToFolder(subFolder,subItem);
 
-                                FetchMessagesService fetchMessagesServiceSubFolder = new FetchMessagesService(subItem, subFolder);
-                                fetchMessagesServiceSubFolder.start();
+                                FetchMessagesOnFolderService fetchMessagesOnFolderServiceSubFolder = new FetchMessagesOnFolderService(subItem, subFolder);
+                                fetchMessagesOnFolderServiceSubFolder.start();
                             }
 
                         }
@@ -108,16 +108,11 @@ public class FetchFoldersService extends Service<Void> {
 
 
 
-public static boolean noServicesActive() {
+/*public static boolean noServicesActive() {
         return NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE == 0;
-}
+}*/
 
 // ROZNE STATE OF THREADS
-
-
-
-
-
 
 
 }

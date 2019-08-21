@@ -12,6 +12,7 @@ public class FolderUpdaterService extends Service<Void> {
 
     private List<Folder> folderList;
 
+
     public FolderUpdaterService(List<Folder> folderList) {
         this.folderList = folderList;
     }
@@ -23,28 +24,26 @@ public class FolderUpdaterService extends Service<Void> {
 
         return new Task<Void>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
 
                 // mamy liste folderow i chcemy aby co jakis czas, sprawdzac ilosc wiadomosci
                 // infinite loop
 
-                for (; ; ) {
+                for (; ;) {
                     try {
 
                         Thread.sleep(10000);
 
-                       // if(FetchFoldersService.noSerivceActive())
+                        // if(FetchFoldersService.noSerivceActive())
 
-                          if (FetchFoldersService.noServicesActive()) {
-                              for(Folder folder : folderList) {
-                                  if(folder.getType() != Folder.HOLDS_FOLDERS && folder.isOpen()) {
-                                      folder.getMessageCount();
-                                  }
-                              }
+                       /*   if (FetchFoldersService.noServicesActive()) {
+                          }*/
 
-
-                          }
-
+                        for (Folder folder : folderList) {
+                            if (folder.getType() != Folder.HOLDS_FOLDERS && folder.isOpen()) {
+                                folder.getMessageCount();
+                            }
+                        }
 
 
                     } catch (Exception e) {

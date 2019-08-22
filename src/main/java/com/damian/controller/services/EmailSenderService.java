@@ -92,7 +92,7 @@ public class EmailSenderService extends Service<Integer> {
                     e.printStackTrace();
                 }
 
-                return null;
+                return result;
             }
         };
     }

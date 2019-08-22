@@ -7,8 +7,9 @@ import com.damian.controller.services.CreateAndRegisterEmailAccountService;
 
 import com.damian.controller.services.FolderUpdaterService;
 import com.damian.controller.services.MessageRendererService;
-import com.damian.model.EmailMessageBean;
-import com.damian.model.GetResolveIcons;
+import com.damian.model.messageBeanContainer.EmailMessageBean;
+import com.damian.model.formatValues.FormatSizeValues;
+import com.damian.model.resolveIcon.GetResolveIcons;
 import com.damian.model.Singleton;
 import com.damian.model.folder.EmailFolderBean;
 
@@ -24,7 +25,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -40,7 +41,7 @@ public class MainController implements Initializable {
 
 
 
-    private ModelForMessageController modelForMessageController = new ModelForMessageController();
+    private ModelForMessages modelForMessages = new ModelForMessages();
 
 
     @FXML
@@ -53,7 +54,7 @@ public class MainController implements Initializable {
     private TableColumn<EmailMessageBean, String> senderColumn;
 
     @FXML
-    private TableColumn<EmailMessageBean, String> sizeColumn;
+    private TableColumn<EmailMessageBean, FormatSizeValues> sizeColumn;
 
     @FXML
     private TableView<EmailMessageBean> emailTableView;
@@ -67,18 +68,21 @@ public class MainController implements Initializable {
     @FXML
     private MessageRendererService messageRendererService;
 
+    @FXML
+    private TableColumn<EmailMessageBean, Date> dateCol;
+
 
 
     // getEmails newMessage
     //  ViewFactory viewFactory = ViewFactory.defaultFactory; using the same static instance
     @FXML
     void ButtonClick(ActionEvent event) {
-        System.out.println("Poczatek initializacji");
+
         Scene scene = ViewFactory.defaultFactory.getComposeMessageScene();
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        System.out.println("KONIEC");
+
 
     }
 
@@ -109,7 +113,14 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       // uptading progress when 1 file is done
+
+       /**
+        * adding css styles
+        * */
+
+        downloadButton.getStyleClass().add("addBobOk");
+
+
 
         progressBar.setVisible(false);
 
@@ -123,7 +134,7 @@ public class MainController implements Initializable {
 
         ViewFactory viewFactory = ViewFactory.defaultFactory;
 
-        FolderUpdaterService folderUpdaterService = new FolderUpdaterService(modelForMessageController.getFoldersList());
+        FolderUpdaterService folderUpdaterService = new FolderUpdaterService(modelForMessages.getFoldersList());
         folderUpdaterService.start();
 
 
@@ -133,24 +144,8 @@ public class MainController implements Initializable {
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-
-
-
-
-
-
-        sizeColumn.setComparator(new Comparator<String>() {
-
-            Integer int1, int2;
-
-            @Override
-            public int compare(String s, String t1) {
-                int1 = EmailMessageBean.formattedValues.get(s);
-                int2 = EmailMessageBean.formattedValues.get(t1);
-                return int1.compareTo(int2);
-            }
-        });
 
 
 
@@ -159,7 +154,7 @@ public class MainController implements Initializable {
         emailFolderTreeView.setShowRoot(false);
 
 
-        CreateAndRegisterEmailAccountService CreateAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService("krztuszenie@gmail.com", "", root, modelForMessageController);
+        CreateAndRegisterEmailAccountService CreateAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService("krztuszenie@gmail.com", "", root, ModelForMessages.modelForMessages);
         CreateAndRegisterEmailAccountService1.start();
 
 
@@ -186,15 +181,9 @@ public class MainController implements Initializable {
         emailTableView.setOnMouseClicked(event -> {
             EmailMessageBean messageBean = emailTableView.getSelectionModel().getSelectedItem();
             if(messageBean != null) {
-              //  messageRenderer.getEngine().loadContent(messageBean.getHtmlContent());
 
-
-                System.out.println("PRZED setSelectedMEssage");
-                modelForMessageController.setSelectedMessage(messageBean);
-
+                modelForMessages.setSelectedMessage(messageBean);
                 messageRendererService.setMessageToRender(messageBean);
-
-                System.out.println("PO setSelectedMEssage");
 
                 singleton.setMessageBean(messageBean);
 
@@ -255,83 +244,6 @@ public class MainController implements Initializable {
 
 
 
-
-
-    /*    //-------------------TreeView Section START-----------------------
-
-       final Node emailImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/mail-open-flat.png")));
-        ((ImageView) emailImage).setFitHeight(25);
-        ((ImageView) emailImage).setFitWidth(25);
-
-
-        final  Node inboxImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/inbox-flat.png")));
-        ((ImageView) inboxImage).setFitHeight(25);
-        ((ImageView) inboxImage).setFitWidth(25);
-
-
-
-        final  Node sentImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/sent.png")));
-        ((ImageView) sentImage).setFitHeight(25);
-        ((ImageView) sentImage).setFitWidth(25);
-
-
-        final Node folderImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/folder.png")));
-        ((ImageView) folderImage).setFitHeight(25);
-        ((ImageView) folderImage).setFitWidth(25);
-
-        final  Node folderImage1 = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/folder.png")));
-        ((ImageView) folderImage1).setFitHeight(25);
-        ((ImageView) folderImage1).setFitWidth(25);
-
-
-
-        final  Node spamImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/spam.png")));
-        ((ImageView) spamImage).setFitHeight(25);
-        ((ImageView) spamImage).setFitWidth(25);
-
-
-        final  Node trashImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/img/trash.png")));
-        ((ImageView) trashImage).setFitHeight(25);
-        ((ImageView) trashImage).setFitWidth(25);
-
-
-        TreeItem<String> root = new TreeItem<>(myAddressRoot,emailImage);
-        root.setExpanded(true);
-
-        TreeItem<String> inbox = new TreeItem<>("inbox", inboxImage);
-        TreeItem<String> sent = new TreeItem<>("sent",sentImage);
-        TreeItem<String> spam = new TreeItem<>("spam", spamImage);
-        TreeItem<String> folder = new TreeItem<>("folder", trashImage);
-
-
-        // root tree structure
-
-        root.getChildren().addAll(inbox, sent,folder, spam);
-
-        // structure for children of inbox, folder, sent, spam
-
-        TreeItem<String> subSent1 = new TreeItem<>("subSent1", folderImage);
-        TreeItem<String> subSent2 = new TreeItem<>("subSent1", folderImage1);
-
-
-        sent.setExpanded(true);
-        sent.getChildren().addAll(subSent1,subSent2);
-
-
-        emailFolderTreeView.setRoot(root);*/
-
-        //----------------TreeView Section END------------------------
-
-
-
-
     }
 
 }
@@ -353,14 +265,6 @@ public void run() {
         });
 
 */
-
-
-
-
-
-
-
-
 
 // button for getting all emails
 /*

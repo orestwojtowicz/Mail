@@ -3,7 +3,7 @@ package com.damian.controller;
 
 import com.damian.controller.services.EmailSenderService;
 import com.damian.imap.EmailConstants;
-import com.damian.model.Singleton;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,12 +27,7 @@ public class ComposeMessageController implements Initializable {
 
     private List<File> attachments = new ArrayList<>();
 
-         private Singleton singleton;
-
-
-
-
-    private ModelForMessageController modelAccess = new ModelForMessageController();
+   // private ModelForMessages modelAccess;
 
 
 
@@ -53,6 +48,9 @@ public class ComposeMessageController implements Initializable {
 
     @FXML
     private Label attachmentLabel;
+
+    @FXML
+    private JFXButton attachBtn;
 
 
 
@@ -76,7 +74,7 @@ public class ComposeMessageController implements Initializable {
         errorLabel.setText("");
        EmailSenderService emailSenderService = new EmailSenderService(
 
-               modelAccess.getEmailAccountByName(senderChoice.getValue()),
+               ModelForMessages.modelForMessages.getEmailAccountByName(senderChoice.getValue()),
                subjectField.getText(),
                recipentField.getText(),
                composeArea.getHtmlText(),
@@ -88,7 +86,7 @@ public class ComposeMessageController implements Initializable {
             if(emailSenderService.getValue() == EmailConstants.MESSAGE_SENT_OK) {
                 errorLabel.setText("message sent successfully");
             } else {
-                errorLabel.setText("error while sending message");
+                errorLabel.setText("message sent successfully error");
             }
         });
 
@@ -101,13 +99,8 @@ public class ComposeMessageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        singleton = Singleton.getInstance();
-
-
-
-                    senderChoice.setItems(modelAccess.getEmailAccountNames());
-                   // senderChoice.setValue(modelAccess.getEmailAccountNames().get(0));
+                    senderChoice.setItems(ModelForMessages.modelForMessages.getEmailAccountNames());
+                     senderChoice.setValue(ModelForMessages.modelForMessages.getEmailAccountNames().get(0));
 
 
 

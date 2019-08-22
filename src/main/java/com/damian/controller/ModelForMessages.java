@@ -1,7 +1,8 @@
 package com.damian.controller;
 
 import com.damian.imap.EmailAccountBean;
-import com.damian.model.EmailMessageBean;
+import com.damian.model.folder.EmailFolderBean;
+import com.damian.model.messageBeanContainer.EmailMessageBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,12 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ModelForMessageController {
+public class ModelForMessages {
 
-    private Map<String, EmailAccountBean> emailAccounts = new HashMap<>();
+
+
+  public static ModelForMessages modelForMessages = new ModelForMessages();
+
+
+    private Map<String, EmailAccountBean> emailAccounts = new HashMap<String, EmailAccountBean>();
     private ObservableList<String> emailAccountsNames = FXCollections.observableArrayList();
-
-
 
     public ObservableList<String> getEmailAccountNames(){
         return emailAccountsNames;
@@ -31,19 +35,27 @@ public class ModelForMessageController {
         emailAccountsNames.add(account.getEmailAddress());
     }
 
-
-
     private EmailMessageBean selectedMessage;
 
-
+    public EmailMessageBean getSelectedMessage() {
+        return selectedMessage;
+    }
 
     public void setSelectedMessage(EmailMessageBean selectedMessage) {
         this.selectedMessage = selectedMessage;
     }
 
+    public EmailFolderBean<String> getSelectedFolder() {
+        return selectedFolder;
+    }
 
+    public void setSelectedFolder(EmailFolderBean<String> selectedFolder) {
+        this.selectedFolder = selectedFolder;
+    }
 
-    private List<Folder> foldersList = new ArrayList<>();
+    private EmailFolderBean<String> selectedFolder;
+
+    private List<Folder> foldersList = new ArrayList<Folder>();
 
     public List<Folder> getFoldersList(){
         return  foldersList;
@@ -52,6 +64,5 @@ public class ModelForMessageController {
     public void addFolder(Folder folder){
         foldersList.add(folder);
     }
-
 
 }

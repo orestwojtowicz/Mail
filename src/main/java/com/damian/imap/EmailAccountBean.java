@@ -1,7 +1,6 @@
 package com.damian.imap;
 
-import com.damian.model.EmailMessageBean;
-import javafx.collections.ObservableList;
+
 
 import javax.mail.*;
 import java.util.Properties;
@@ -15,6 +14,10 @@ public class EmailAccountBean {
     private Session session;
     private Store store;
 
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
     private int loginState = EmailConstants.LOGIN_STATE_NOT_READY;
     public static final int MESSAGE_SENT_OK = 4;
@@ -39,6 +42,10 @@ public class EmailAccountBean {
 
     public int getLoginState() {
         return loginState;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public EmailAccountBean(String EmailAdress, String Password) {
@@ -83,30 +90,8 @@ public class EmailAccountBean {
 
     }
 
-    public String getPassword() {
-        return password;
-    }
 
 
-/*    public void addEmailsToData(ObservableList<EmailMessageBean> data) {
-        try {
-
-            Folder folder = store.getFolder("INBOX");
-            folder.open(Folder.READ_ONLY);
-
-            for (int i = folder.getMessageCount(); i > 0; i--) {
-                Message message = folder.getMessage(i);
-                EmailMessageBean messageBean = new EmailMessageBean(message.getSubject(), message.getFrom()[0].toString(),
-                        message.getSize(), "", message.getFlags().contains(Flags.Flag.SEEN));
-                System.out.println("Got: " + messageBean);
-                data.add(messageBean);
-            }
-
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }*/
 }
 
 

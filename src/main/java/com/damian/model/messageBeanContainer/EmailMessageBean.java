@@ -1,34 +1,42 @@
-package com.damian.model;
+package com.damian.model.messageBeanContainer;
 
 
+import com.damian.model.formatValues.FormatSizeValues;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+
+
+/**
+ * asdasd
+ */
+
 
 public class EmailMessageBean {
 
     private SimpleStringProperty sender;
     private SimpleStringProperty subject;
-    private SimpleStringProperty size;
-    private boolean flag;
+    private SimpleObjectProperty<FormatSizeValues> size;
     private Message messageReference;
-
+    private SimpleObjectProperty<Date> date;
     private List<MimeBodyPart> attachmentsList = new ArrayList<>();
     private StringBuffer attachmentsNames = new StringBuffer();
 
-    public static Map<String, Integer> formattedValues = new HashMap<>();
 
-    public EmailMessageBean(String sender, String subject, int size, boolean flag, Message messageReference) {
+
+
+
+    public EmailMessageBean(String sender, String subject, int size, Message messageReference, Date date) {
         this.sender = new SimpleStringProperty(sender);
         this.subject = new SimpleStringProperty(subject);
-        this.size = new SimpleStringProperty(formatSize(size));
+        this.size = new SimpleObjectProperty<FormatSizeValues>(new FormatSizeValues(size));
         this.messageReference = messageReference;
+        this.date = new SimpleObjectProperty<>(date);
 
     }
 
@@ -47,20 +55,32 @@ public class EmailMessageBean {
     }
 
 
+    public Date getDate() {
+        return date.get();
+    }
+
+    public SimpleObjectProperty<Date> dateProperty() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date.set(date);
+    }
+
+    public FormatSizeValues getSize() {
+        return size.get();
+    }
+
+    public SimpleObjectProperty<FormatSizeValues> sizeProperty() {
+        return size;
+    }
+
+    public void setSize(FormatSizeValues size) {
+        this.size.set(size);
+    }
+
     public List<MimeBodyPart> getAttachmentsList() {
         return attachmentsList;
-    }
-
-    public StringBuffer getAttachmentsNames() {
-        return attachmentsNames;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
     }
 
     public Message getMessageReference() {
@@ -77,31 +97,4 @@ public class EmailMessageBean {
     }
 
 
-
-    public String getSize() {
-        return size.get();
-    }
-
-
-    private String formatSize(int size) {
-
-      String returnValue;
-
-      if (size <= 0) {
-          returnValue = "0";
-      } else if (size < 1024) {
-          returnValue = size + " B";
-      } else if (size < 1048576) {
-           returnValue = size / 1024 + " kB";
-      } else {
-          returnValue = size / 1048576 + " mB";
-       }
-      formattedValues.put(returnValue, size);
-       return returnValue;
-    }
-
-
 }
-/**
- * asdasd
- */

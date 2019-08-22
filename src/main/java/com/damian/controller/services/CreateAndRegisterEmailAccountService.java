@@ -1,7 +1,7 @@
 package com.damian.controller.services;
 
 
-import com.damian.controller.ModelForMessageController;
+import com.damian.controller.ModelForMessages;
 import com.damian.imap.EmailAccountBean;
 import com.damian.imap.EmailConstants;
 import com.damian.model.folder.EmailFolderBean;
@@ -13,7 +13,7 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     private String emailAddress;
     private String password;
     private EmailFolderBean<String> folderRoot;
-    private ModelForMessageController modelAccess;
+    //private ModelForMessages modelAccess;
 
 
 
@@ -21,12 +21,12 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     public CreateAndRegisterEmailAccountService(
             String emailAddress, String password,
             EmailFolderBean<String> folderRoot,
-            ModelForMessageController modelAccess) {
+            ModelForMessages modelAccess) {
 
         this.emailAddress = emailAddress;
         this.password = password;
         this.folderRoot = folderRoot;
-        this.modelAccess = modelAccess;
+        //this.modelAccess = modelAccess;
 
     }
 
@@ -40,16 +40,19 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
                 EmailAccountBean emailAccount = new EmailAccountBean(emailAddress, password);
                 if(emailAccount.getLoginState() == EmailConstants.LOGIN_STATE_SUCCEDED){
 
+                     /**
+                      *
+                      * Bug with getting emailAddress, it will not work without setEmailAddress, NullPointer
+                      *
+                      * */
 
-                    modelAccess.addAccount(emailAccount);
+                    emailAccount.setEmailAddress(emailAddress);
+                    ModelForMessages.modelForMessages.addAccount(emailAccount);
 
 
                     EmailFolderBean<String> emailFolderBean = new EmailFolderBean<>(emailAddress);
-
                     folderRoot.getChildren().add(emailFolderBean);
-
-                    FetchFoldersService fetchFoldersService = new FetchFoldersService(emailFolderBean, emailAccount, modelAccess);
-
+                    FetchFoldersService fetchFoldersService = new FetchFoldersService(emailFolderBean, emailAccount, ModelForMessages.modelForMessages);
                     fetchFoldersService.start();
                 }
                 return emailAccount.getLoginState();
@@ -59,3 +62,29 @@ public class CreateAndRegisterEmailAccountService extends Service<Integer> {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

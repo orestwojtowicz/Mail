@@ -1,6 +1,6 @@
 package com.damian.controller.services;
 
-import com.damian.model.EmailMessageBean;
+import com.damian.model.messageBeanContainer.EmailMessageBean;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
@@ -15,17 +15,17 @@ public class AttachmentsHandleService extends Service<Void> {
 
 
     private EmailMessageBean message;
-
     private String LOCATION_OF_DOWNLOADS = System.getProperty("user.home") + "/Downloads/";
-
     private ProgressBar progressBar;
     private Label label;
+
+
+
 
     public AttachmentsHandleService(ProgressBar progressBar, Label label) {
 
         this.progressBar = progressBar;
         this.label = label;
-
         this.setOnRunning(e->showVisuals(true));
         this.setOnSucceeded(e->showVisuals(false));
 
@@ -53,10 +53,6 @@ public class AttachmentsHandleService extends Service<Void> {
                         e.printStackTrace();
                     }
                 }
-
-
-
-
                 return null;
             }
 
@@ -92,7 +88,7 @@ public class AttachmentsHandleService extends Service<Void> {
 
 
 
-
+// WARNING: Can not retrieve property 'date' in PropertyValueFactory: javafx.scene.control.cell.PropertyValueFactory@c166ed with provided class type: class com.damian.model.messageBeanContainer.EmailMessageBean
 
 
 

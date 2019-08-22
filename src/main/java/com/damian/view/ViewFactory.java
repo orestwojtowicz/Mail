@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+
 import java.io.IOException;
 
 
@@ -75,6 +76,7 @@ public class ViewFactory {
     private Scene sceneInitializerHelperMethod(Parent root, String cssFile) {
 
         Scene scene = new Scene(root);
+
         scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
         return scene;
     }

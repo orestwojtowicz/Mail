@@ -1,6 +1,6 @@
 package com.damian.controller.services;
 
-import com.damian.controller.ModelForMessageController;
+import com.damian.controller.ModelForMessages;
 import com.damian.imap.EmailAccountBean;
 import com.damian.model.folder.EmailFolderBean;
 import javafx.concurrent.Service;
@@ -17,12 +17,12 @@ public class FetchFoldersService extends Service<Void> {
     private EmailFolderBean<String> foldersRoot;
     private EmailAccountBean emailAccountBean;
 
-    private ModelForMessageController modelAccess;
+    private ModelForMessages modelAccess;
 
    //private static int NUMBER_OF_FETCHFOLDERSSERVICES_ACTIVE = 0;
 
 
-    public FetchFoldersService(EmailFolderBean<String> foldersRoot, EmailAccountBean emailAccountBean, ModelForMessageController modelAccess) {
+    public FetchFoldersService(EmailFolderBean<String> foldersRoot, EmailAccountBean emailAccountBean, ModelForMessages modelAccess) {
         this.foldersRoot = foldersRoot;
         this.emailAccountBean = emailAccountBean;
         this.modelAccess = modelAccess;

@@ -1,4 +1,4 @@
-package com.damian.model;
+package com.damian.model.resolveIcon;
 
 import com.damian.model.folder.EmailFolderBean;
 

@@ -7,7 +7,7 @@ plugins {
 group 'com.damian'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 9
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -23,12 +23,6 @@ dependencies {
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     compile 'org.kordamp.ikonli:ikonli-swing:11.3.4'
     
-  
-
-
-
-
-
 }
 
 javafx {

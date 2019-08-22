@@ -1,12 +1,12 @@
 package com.damian.model.folder;
 
-import com.damian.model.EmailMessageBean;
+import com.damian.model.messageBeanContainer.EmailMessageBean;
 import com.damian.view.IconResolver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
-import javax.mail.Flags;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -25,7 +25,6 @@ public class EmailFolderBean<T> extends TreeItem<String> {
     }
 
 
-
     public EmailFolderBean(String value, String completeName) {
         super(value, IconResolver.iconResolver.resolveIcon(value));
         this.name = value;
@@ -35,12 +34,12 @@ public class EmailFolderBean<T> extends TreeItem<String> {
 
        public void addEmail(int position, Message message) {
            try {
-               boolean isRead = message.getFlags().contains(Flags.Flag.SEEN);
+              // boolean isRead = message.getFlags().contains(Flags.Flag.SEEN);
                EmailMessageBean emailMessageBean = new EmailMessageBean(message.getSubject(),
                        message.getFrom()[0].toString(),
                        message.getSize(),
-                       isRead,
-                       message);
+                       message,
+                       message.getSentDate());
 
                if(position < 0) {
                    data.add(emailMessageBean);
@@ -58,7 +57,7 @@ public class EmailFolderBean<T> extends TreeItem<String> {
        }
 
        // return Observable containing messages
-     public ObservableList<EmailMessageBean> getData(){
+     public ObservableList<EmailMessageBean> getData() {
         return data;
     }
 

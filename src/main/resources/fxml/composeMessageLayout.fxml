@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.web.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="519.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.ComposeMessageController">
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane prefHeight="519.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.ComposeMessageController">
    <children>
       <AnchorPane layoutX="13.0" layoutY="13.0" prefHeight="478.0" prefWidth="894.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="35.0">
          <children>
@@ -21,7 +22,7 @@
             <TextField fx:id="subjectField" layoutX="68.0" layoutY="82.0" prefHeight="25.0" prefWidth="510.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="50.7412109375" />
             <HTMLEditor fx:id="composeArea" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1.0" layoutY="150.0" prefHeight="205.0" prefWidth="662.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
             <Label fx:id="errorLabel" layoutX="19.0" layoutY="444.0" prefHeight="15.0" prefWidth="61.0" text="no error" AnchorPane.leftAnchor="19.0" />
-            <Button layoutX="585.0" layoutY="372.0" mnemonicParsing="false" onAction="#sendBtnAction" text="Send" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="-0.2587890625" />
+            <JFXButton fx:id="attachBtn" layoutX="585.0" layoutY="372.0" mnemonicParsing="false" onAction="#sendBtnAction" text="Send" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="-0.2587890625" />
          </children>
       </AnchorPane>
    </children>

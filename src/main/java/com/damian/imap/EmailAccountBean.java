@@ -7,7 +7,6 @@ import java.util.Properties;
 
 public class EmailAccountBean {
 
-
     private String emailAddress;
     private String password;
     private Properties properties;
@@ -60,8 +59,6 @@ public class EmailAccountBean {
         properties.put("mail.smtps.auth", "true");
         properties.put("incomingHost", "imap.gmail.com");
         properties.put("outgoingHost", "smtp.gmail.com");
-
-
 
         Authenticator auth = new Authenticator() {
             @Override

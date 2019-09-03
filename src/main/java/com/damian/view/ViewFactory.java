@@ -22,6 +22,7 @@ public class ViewFactory {
     private final String MAIN_FXML = "fxml/main.fxml";
     private final String DETAILS_FXML = "fxml/emailDetailsLayout.fxml";
     private final String COMPOSE_MESSAGE_FXML = "fxml/composeMessageLayout.fxml";
+    private final String ADD_NEW_ACCOUNT_FXML = "fxml/addNewAccount.fxml";
 
 
 
@@ -71,6 +72,22 @@ public class ViewFactory {
         return sceneInitializerHelperMethod(root, CSS_FILE);
 
     }
+
+
+    public Scene getAddNewAccountScene() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource(ADD_NEW_ACCOUNT_FXML));
+
+        } catch (IOException e) {
+            root = null;
+            e.printStackTrace();
+        }
+        return sceneInitializerHelperMethod(root, CSS_FILE);
+
+    }
+
+
 
 
     private Scene sceneInitializerHelperMethod(Parent root, String cssFile) {

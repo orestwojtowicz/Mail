@@ -33,11 +33,7 @@ public class FolderUpdaterService extends Service<Void> {
                     try {
 
                         Thread.sleep(10000);
-
-                        // if(FetchFoldersService.noSerivceActive())
-
-                       /*   if (FetchFoldersService.noServicesActive()) {
-                          }*/
+                        System.out.println("UPDATE SERVICE RUNNING ");
 
                         for (Folder folder : folderList) {
                             if (folder.getType() != Folder.HOLDS_FOLDERS && folder.isOpen()) {

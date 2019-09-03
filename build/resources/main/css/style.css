@@ -14,10 +14,22 @@ AnchorPane {
 
 
 
-.addBobOk:hover {
+
+
+.basicButtons {
     -fx-background-color:#90EE90;
     -fx-background-radius: 5,5,4;
     -fx-background-insets: 0 0 -1 0,0,1;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
     -fx-text-alignment: center;
+}
+
+
+.basicButtons:hover {
+    -fx-background-color:#919c91;
+}
+
+
+.labelColor {
+    color: green;
 }

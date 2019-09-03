@@ -51,21 +51,21 @@ public class EmailSenderService extends Service<Integer> {
             protected Integer call() throws Exception {
 
                 try {
-//SetUp:
+                        // SetUp:
                     Session session = emailAccountBean.getSession();
                     MimeMessage message = new MimeMessage(session);
                     message.setFrom(emailAccountBean.getEmailAddress());
                     message.addRecipients(Message.RecipientType.TO, recipient);
                     message.setSubject(subject);
 
-                    //Setting the content:
+                    // Setting the content:
                     Multipart multipart = new MimeMultipart();
                     BodyPart messageBodyPart = new MimeBodyPart();
                     messageBodyPart.setContent(content, "text/html");
                     multipart.addBodyPart(messageBodyPart);
 
-                    //adding attachments:
-                    if(attachments.size() >0){
+                    // adding attachments:
+                    if(attachments.size() > 0){
                         for(File file: attachments){
                             MimeBodyPart messageBodyPartAttach = new MimeBodyPart();
                             DataSource source = new FileDataSource(file.getAbsolutePath());
@@ -76,9 +76,9 @@ public class EmailSenderService extends Service<Integer> {
                     }
                     message.setContent(multipart);
 
-                    //Sending the message:
+                    // Sending the message:
                     Transport transport = session.getTransport();
-                    transport.connect(emailAccountBean.getProperties().getProperty("outgoingHost"), // zeby dostac smtp.protocol z gmail
+                    transport.connect(emailAccountBean.getProperties().getProperty("outgoingHost"), // getting smtp protocol from gmail
                             emailAccountBean.getEmailAddress());
                             emailAccountBean.getPassword();
                     transport.sendMessage(message, message.getAllRecipients());

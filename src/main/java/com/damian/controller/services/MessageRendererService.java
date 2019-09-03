@@ -39,7 +39,6 @@ public class MessageRendererService extends Service<Void> {
 			@Override
 			protected Void call() {
 				renderMessage();
-				
 				return null;
 			}			
 		};
@@ -50,7 +49,7 @@ public class MessageRendererService extends Service<Void> {
 	
 	
 	private void renderMessage(){
-		//clear the sb:
+		// clear the sb:
 		sb.setLength(0);
 		// clear attachments
 		messageToRender.clearAttachments();
@@ -88,8 +87,8 @@ public class MessageRendererService extends Service<Void> {
 
 						messageToRender.addAttachment(mbp);
 
-						//Sometimes the text content of the message is encapsulated in another multipart,
-						//so we have to iterate again through it.
+						// Sometimes the text content of the message is encapsulated in another multipart,
+						// so we have to iterate again through it.
 					}else if(bp.getContentType().contains("multipart")){
 						Multipart mp2 = (Multipart)bp.getContent();
 						for (int j = mp2.getCount()-1; j >= 0; j--) {
@@ -151,8 +150,6 @@ if (contentType.contains("multipart")) {
 		// code to save attachment...
 		}
 		}
-
-
 
 */
 

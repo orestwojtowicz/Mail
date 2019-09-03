@@ -1,4 +1,4 @@
-package com.damian.controller;
+package com.damian.model;
 
 import com.damian.imap.EmailAccountBean;
 import com.damian.model.folder.EmailFolderBean;

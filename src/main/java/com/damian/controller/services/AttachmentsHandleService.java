@@ -20,8 +20,6 @@ public class AttachmentsHandleService extends Service<Void> {
     private Label label;
 
 
-
-
     public AttachmentsHandleService(ProgressBar progressBar, Label label) {
 
         this.progressBar = progressBar;
@@ -62,7 +60,7 @@ public class AttachmentsHandleService extends Service<Void> {
 
     private void showVisuals(boolean show) {
         progressBar.setVisible(show);
-        label.setVisible(show);
+
     }
 
 }

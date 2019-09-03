@@ -2,15 +2,17 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.EmailDetailsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.EmailDetailsController">
    <children>
       <AnchorPane layoutX="-2.0" layoutY="-10.0" prefHeight="430.0" prefWidth="554.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="0.0">
          <children>
             <WebView fx:id="webView" layoutX="12.0" layoutY="215.0" prefHeight="200.0" prefWidth="511.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="215.0" />
             <Label fx:id="subjectLabel" layoutX="14.0" layoutY="14.0" prefHeight="16.0" prefWidth="358.0" text="Subject" />
             <Label fx:id="senderLabel" layoutX="14.0" layoutY="56.0" prefHeight="16.0" prefWidth="378.0" text="Sender" />
+            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="82.0" prefHeight="200.0" prefWidth="506.0" />
          </children>
       </AnchorPane>
    </children>

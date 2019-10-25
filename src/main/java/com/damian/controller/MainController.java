@@ -150,7 +150,7 @@ public class MainController implements Initializable {
 
 
         CreateAndRegisterEmailAccountService createAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService(
-                "damianwojtowicz94@gmail.com", "Lapierre2010", root, ModelForMessages.modelForMessages);
+                "", "", root, ModelForMessages.modelForMessages);
         createAndRegisterEmailAccountService1.start();
 
 

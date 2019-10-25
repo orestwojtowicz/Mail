@@ -1,0 +1,1 @@
+[![CircleCI](https://circleci.com/gh/orestwojtowicz/Mail.svg?style=svg)](https://circleci.com/gh/orestwojtowicz/Mail)

@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="871.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.MainController">
+<AnchorPane fx:controller="com.damian.controller.MainController" prefHeight="871.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
 
       <JFXButton fx:id="newMessage" layoutX="12.0" layoutY="28.0" mnemonicParsing="false" onAction="#ButtonClick" prefHeight="32.0" prefWidth="109.0" text="New Message" />
 
 
 
-      <JFXButton fx:id="downloadButton" layoutX="285.0" layoutY="28.0" mnemonicParsing="false" onAction="#DownloadAction" prefHeight="32.0" prefWidth="100.0" text="Download" />
+      <JFXButton fx:id="downloadButton" layoutX="285.0" layoutY="28.0" mnemonicParsing="false" onAction="#DownloadAction" prefHeight="32.0" prefWidth="100.0" text="Download" AnchorPane.rightAnchor="623.0" />
       <TreeView fx:id="emailFolderTreeView" layoutX="6.0" layoutY="79.0" prefHeight="657.0" prefWidth="200.0" style="-fx-opacity: 0.9;" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="79.0" />
       <TableView fx:id="emailTableView" layoutX="206.0" layoutY="78.0" prefHeight="289.0" prefWidth="559.0" style="-fx-opacity: 0.9;" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="78.0">
          <columns>

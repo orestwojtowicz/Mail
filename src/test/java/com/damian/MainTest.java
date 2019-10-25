@@ -24,7 +24,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
 
-public class MainTest extends ApplicationTest{
+public class MainTest extends ApplicationTest {
 
 
 

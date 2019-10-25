@@ -15,6 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+
         ViewFactory viewFactory = new ViewFactory();
         Scene scene = viewFactory.getMainScene();
         primaryStage.setScene(scene);

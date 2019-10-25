@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<AnchorPane prefHeight="611.0" prefWidth="1074.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damian.controller.ComposeMessageController">
+   <children>
+      <AnchorPane layoutX="13.0" layoutY="13.0" prefHeight="478.0" prefWidth="894.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="35.0">
+         <children>
+            <Label layoutX="14.0" layoutY="21.0" prefHeight="15.0" prefWidth="50.0" text="From" AnchorPane.leftAnchor="14.0" />
+            <Label layoutX="21.0" layoutY="53.0" prefHeight="15.0" prefWidth="35.0" text="To" AnchorPane.leftAnchor="14.0" />
+            <Label layoutX="1.0" layoutY="87.0" text="Subject" AnchorPane.leftAnchor="1.0" />
+            <JFXButton fx:id="attachBtn" layoutX="622.0" layoutY="118.0" mnemonicParsing="false" onAction="#attachBtnAction" text="Attach" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="622.0" />
+            <Label fx:id="attachmentLabel" layoutX="738.0" layoutY="123.0" text="No attachments" />
+            <ChoiceBox fx:id="senderChoice" layoutX="61.0" layoutY="16.0" prefHeight="25.0" prefWidth="523.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="51.7412109375" />
+            <TextField fx:id="recipentField" layoutX="62.0" layoutY="48.0" prefHeight="25.0" prefWidth="523.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="50.7412109375" />
+            <TextField fx:id="subjectField" layoutX="68.0" layoutY="82.0" prefHeight="25.0" prefWidth="510.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="50.7412109375" />
+            <HTMLEditor fx:id="composeArea" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1.0" layoutY="161.0" prefHeight="321.0" prefWidth="893.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="161.0" />
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="sentBtn" layoutX="944.0" layoutY="531.0" mnemonicParsing="false" onAction="#sendBtnAction" text="Send" AnchorPane.bottomAnchor="54.0" AnchorPane.rightAnchor="79.0" />
+      <Label fx:id="errorLabel" layoutX="22.0" layoutY="536.0" prefHeight="16.0" prefWidth="134.0" text="no error" AnchorPane.leftAnchor="22.0" />
+   </children>
+</AnchorPane>

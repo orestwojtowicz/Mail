@@ -68,7 +68,6 @@ public class EmailAccountBean {
         };
 
         // Connecting:
-
         session = Session.getInstance(properties, auth);
 
 

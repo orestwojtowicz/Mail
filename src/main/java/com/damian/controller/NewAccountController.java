@@ -1,3 +1,4 @@
+/*
 package com.damian.controller;
 
 
@@ -5,8 +6,10 @@ import com.damian.controller.services.AttachmentsHandleService;
 import com.damian.controller.services.CreateAndRegisterEmailAccountService;
 import com.damian.controller.services.FolderUpdaterService;
 import com.damian.controller.services.MessageRendererService;
+import com.damian.imap.EmailAccountBean;
 import com.damian.model.ModelForMessages;
 import com.damian.model.folder.EmailFolderBean;
+import com.damian.view.ViewFactory;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
@@ -39,15 +42,22 @@ public class NewAccountController implements Initializable {
     Button submit;
 
 
+
     @FXML
    Integer addAccount(ActionEvent event) {
-        CreateAndRegisterEmailAccountService createAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService(email.getText(), password.getText(), root, ModelForMessages.modelForMessages);
+
+
+
+        CreateAndRegisterEmailAccountService createAndRegisterEmailAccountService1 =
+                new CreateAndRegisterEmailAccountService(email.getText(), password.getText(),
+                        root, ModelForMessages.modelForMessages);
         createAndRegisterEmailAccountService1.start();
 
         System.out.println("EMAIL " + email.getText() + " PASSWORD " + password.getText());
 
         FolderUpdaterService folderUpdaterService = new FolderUpdaterService(ModelForMessages.modelForMessages.getFoldersList());
         folderUpdaterService.start();
+
 
         return 1;
     }
@@ -67,3 +77,4 @@ public class NewAccountController implements Initializable {
     }
 
 }
+*/

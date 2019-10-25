@@ -56,13 +56,5 @@ public class IconResolver {
 
     }
 
-
-
-
-
-
-
-
-
 }
 

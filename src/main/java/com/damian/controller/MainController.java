@@ -106,6 +106,7 @@ public class MainController implements Initializable {
         if(messageBean != null && messageBean.hasAttachments()) {
             attachmentsHandleService.setMessage(messageBean);
             attachmentsHandleService.restart();
+
         }
 
     }
@@ -126,7 +127,7 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
        // disabling buttons, when folders are not loaded
-        disableButtonHelperMethod(newMessage, downloadButton);
+       disableButtonHelperMethod(newMessage, downloadButton);
 
        /**
         * adding css styles
@@ -148,13 +149,9 @@ public class MainController implements Initializable {
         progressBar.progressProperty().bind(attachmentsHandleService.progressProperty());
 
 
-
-
-
-
-        CreateAndRegisterEmailAccountService createAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService("", "", root, ModelForMessages.modelForMessages);
+        CreateAndRegisterEmailAccountService createAndRegisterEmailAccountService1 = new CreateAndRegisterEmailAccountService(
+                "damianwojtowicz94@gmail.com", "Lapierre2010", root, ModelForMessages.modelForMessages);
         createAndRegisterEmailAccountService1.start();
-
 
 
 
@@ -162,7 +159,7 @@ public class MainController implements Initializable {
         ViewFactory viewFactory = ViewFactory.defaultFactory;
 
        FolderUpdaterService folderUpdaterService = new FolderUpdaterService(modelForMessages.getFoldersList());
-      folderUpdaterService.start();
+       folderUpdaterService.start();
 
         singleton = Singleton.getInstance();
 
@@ -173,19 +170,8 @@ public class MainController implements Initializable {
 
 
 
-
-
             emailFolderTreeView.setRoot(root);
             emailFolderTreeView.setShowRoot(false);
-
-
-
-
-
-
-
-
-
 
 
         emailFolderTreeView.setOnMouseClicked(event -> {
@@ -208,9 +194,7 @@ public class MainController implements Initializable {
                 messageRendererService.setMessageToRender(messageBean);
                 singleton.setMessageBean(messageBean);
                 messageRendererService.restart(); // bo chcemy aby dzialalo za kazdym razem jak klikne a nie tylko raz jak klikne
-
                 // bo zmieniam on Application thread wyglad i to sie r obi w runnable
-
                 // Platform.runLater(messageRendererService);
 
             }

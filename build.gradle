@@ -12,21 +12,45 @@ sourceCompatibility = 11
 repositories {
     mavenCentral()
     jcenter()
+   
  
 }
 
+
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+   
     compile 'com.jfoenix:jfoenix:9.0.9'
     
     compile group: 'com.sun.mail', name: 'imap', version: '1.6.3'
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     compile 'org.kordamp.ikonli:ikonli-swing:11.3.4'
+
+    testCompile group: 'org.loadui', name: 'testFx', version: '3.1.0'
+
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    testCompile "org.testfx:testfx-junit5:4.0.16-alpha"
+
     
+    testCompile "org.testfx:testfx-spock:4.0.16-alpha"
+
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+
+
+    testCompile group: 'de.saxsys', name: 'jfx-testrunner', version: '1.2'
+
+
+    compile group: 'tanukisoft', name: 'wrapper', version: '3.2.3' // ServiceWrapper
+
+    // https://mvnrepository.com/artifact/org.jvnet.mock-javamail/mock-javamail
+    testCompile group: 'org.jvnet.mock-javamail', name: 'mock-javamail', version: '1.9'
+
+
+
 }
 
 javafx {
-   modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
     version = '11.0.2'
 }
 

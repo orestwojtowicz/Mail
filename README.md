@@ -1,8 +1,33 @@
+# Master Thesis
+### Research on the technological capabilities of postal protocols, analysis of tools for building applications and developing e-mail client applications using Java programming language
+[PDF version](https://drive.google.com/open?id=1jyJdpWYFhjj5MKO_P1FBOwIvXMvHYoM9) <br>
+Work written under supervision of [prof. Olesya Afanasyeva](http://www.technika.up.krakow.pl/~wwwitech/pl/konsultacje.html)
+
 [![CircleCI](https://circleci.com/gh/orestwojtowicz/Mail.svg?style=svg)](https://circleci.com/gh/orestwojtowicz/Mail)
+<table>
+<tr>
+    <td>
+    <img src="https://raw.githubusercontent.com/orestwojtowicz/Mail/master/readme/main.png" 
+    alt="#" >
+    </td>
+</tr>
+<tr>
+    <td>
+      <img src="https://raw.githubusercontent.com/orestwojtowicz/Mail/master/readme/gif1.gif" 
+        alt="#">
+    </td>
+        <img src="https://raw.githubusercontent.com/orestwojtowicz/Mail/master/readme/gif2.gif" 
+                            alt="#">
+ </tr>
+</table>
 
+## Sending new messages
+![](readme/send.png)
+![](readme/gif3.gif)
+<br><br><br>
 
-
-
+## Reading emails
+![](readme/gif4.gif)
 
 
 # Java Mail Application
@@ -91,11 +116,16 @@ At the end we can just @Override Task
 * [JFoenix](http://www.jfoenix.com/) - styling buttons, labels etc.
 * [JavaMail](https://javaee.github.io/javamail/) - Provides necessary classes for connection and downloading messages
 * [Gradle](https://maven.gradle.org/) - Dependency Management
+* [CSS](https://www.w3schools.com/) - cascading style sheets
 
 ## Features to add
 - application needs to be tested
 - refactor ViewFactory.class
 
+## Acknowledgement
+
+I would like to thank my professor in all help and support which she provided me in doing my master thesis.
+[prof. Olesya Afanasyeva](http://www.technika.up.krakow.pl/~wwwitech/pl/konsultacje.html)
 
 
 ## License

@@ -13,7 +13,7 @@ import java.util.*;
 
 
 /**
- * asdasd
+ *
  */
 
 
@@ -26,9 +26,6 @@ public class EmailMessageBean {
     private SimpleObjectProperty<Date> date;
     private List<MimeBodyPart> attachmentsList = new ArrayList<>();
     private StringBuffer attachmentsNames = new StringBuffer();
-
-
-
 
 
     public EmailMessageBean(String sender, String subject, int size, Message messageReference, Date date) {

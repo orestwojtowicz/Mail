@@ -13,9 +13,7 @@ import java.io.IOException;
 
 public class ViewFactory {
 
-
     public static ViewFactory defaultFactory = new ViewFactory();
-
 
 
     private final String CSS_FILE = "/css/style.css";
@@ -23,10 +21,6 @@ public class ViewFactory {
     private final String DETAILS_FXML = "fxml/emailDetailsLayout.fxml";
     private final String COMPOSE_MESSAGE_FXML = "fxml/composeMessageLayout.fxml";
     private final String ADD_NEW_ACCOUNT_FXML = "fxml/addNewAccount.fxml";
-
-
-
-
 
 
    public Scene getMainScene() {
@@ -42,10 +36,6 @@ public class ViewFactory {
         }
         return sceneInitializerHelperMethod(root, CSS_FILE);
     }
-
-
-
-
 
     public Scene getEmailDetailScene() {
         Parent root;

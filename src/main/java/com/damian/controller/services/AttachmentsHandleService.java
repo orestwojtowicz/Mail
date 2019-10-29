@@ -36,7 +36,7 @@ public class AttachmentsHandleService extends Service<Void> {
 
     @Override
     protected Task<Void> createTask() {
-        return new Task<Void>(){
+        return new Task<>(){
             @Override
             protected Void call() {
 
